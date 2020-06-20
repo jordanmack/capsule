@@ -234,7 +234,11 @@ fn run_cli() -> Result<()> {
                 .filter(|c| build_names.is_empty() || build_names.contains(&c.name.as_str()))
                 .collect();
             if contracts.is_empty() {
-                println!("Nothing to do");
+                if build_names.is_empty() {
+                    println!("No contracts found");
+                } else {
+                    println!("No contracts found matching specified name(s)");
+                }
             } else {
                 for c in contracts {
                     println!("Building contract {}", c.name);
